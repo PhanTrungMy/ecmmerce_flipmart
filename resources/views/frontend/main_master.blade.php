@@ -8,7 +8,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="MediaCenter, Template, eCommerce">
 <meta name="robots" content="all">
-<title>Easy Online Shop</title>
+<title>@yield('title')</title>
 <!-- Customizable CSS -->
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
 
@@ -70,5 +70,71 @@
       }
     @endif
   </script>
+  {{-- add to card form --}}
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Product Name</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                
+              </div>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-group">
+                <li class="list-group-item">Product Price : </li>
+                <li class="list-group-item">Product Code : </li>
+                <li class="list-group-item">Category : </li>
+                <li class="list-group-item">Brand : </li>
+                <li class="list-group-item"> Stock : </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Choose Color</label>
+                <select name="" class="form-control" id="exampleFormControlSelect1">
+                  <option >1</option>
+                  <option >2</option>
+                  <option >3</option>
+                  <option >4</option>
+                  <option >5</option>
+
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Choose Size</label>
+                <select name="" class="form-control" id="exampleFormControlSelect1">
+                  <option >1</option>
+                  <option >2</option>
+                  <option >3</option>
+                  <option >4</option>
+                  <option >5</option>
+
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Quantity</label>
+                <input type="number" class="form-control" value="1" min="1" placeholder="Quantity">
+              </div>
+              <li class="add-cart-button btn-group">
+                <button  class="btn btn-primary icon"
+                    type="button" title="Add Cart" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i
+                        class="fa fa-shopping-cart"></i> </button>
+                <button class="btn btn-primary cart-btn" type="button">Add to
+                    cart</button>
+            </li>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
