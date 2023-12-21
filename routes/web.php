@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\IndexController;
 use App\Models\User;
@@ -120,3 +121,15 @@ Route::get('product/tag/{tag}', [IndexController::class, 'ProductTag']);
 Route::get('subcategory/product/{subcat_id}/{slug}', [IndexController::class, 'SubCategoryWiseData']);
 //subsubcategory wise data
 Route::get('subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class, 'SubSubCategoryWiseData']);
+//product view modal 
+Route::get('products/view/modal/{id}', [IndexController::class, 'ProductViewModal']);
+
+
+// route Cart
+Route::post('/cart/add/store/{id}', [CartController::class, 'AddToCart']);
+// mini cart
+Route::get('/product/mini/cart', [CartController::class, 'MiniCartView']);
+// mini cart remove
+Route::get('/mini/cart/remove/{rowId}', [CartController::class, 'MiniCartRemove']);
+// add to wishlist 
+Route::get('/add/wishlist/{product_id}', [CartController::class, 'AddToWishlist']);

@@ -26,7 +26,7 @@
 
 
                     <!-- ============================================== HOT DEALS ============================================== -->
-                @include('frontend.common.hot_deal')
+                    @include('frontend.common.hot_deal')
                     <!-- ============================================== HOT DEALS: END ============================================== -->
 
                     <!-- ============================================== NEWSLETTER ============================================== -->
@@ -132,7 +132,7 @@
                         </div><!-- /.gallery-holder -->
                         <div class='col-sm-6 col-md-7 product-info-block'>
                             <div class="product-info">
-                                <h1 class="name">
+                                <h1 class="name" id="pname">
                                     @if (session()->get('Language') == 'hindi')
                                         {{ $product->product_name_hin }}
                                     @else
@@ -213,19 +213,22 @@
                                 {{-- Add color and size --}}
 
                                 <div class="row">
-
-
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label class="info-title control-label">choose Color<span></span></label>
-                                            <select class="form-control unicase-form-control selectpicker"
-                                                style="display: none">
+                                            @if ($product->product_color_en == null)
+                                            @else
+                                                <label class="info-title control-label">choose
+                                                    Color<span></span></label>
+                                                <select class="form-control unicase-form-control selectpicker"
+                                                    style="display: none" id="color">
 
-                                                <option>--choose Color--</option>
-                                                @foreach ($product_color_en as $color)
-                                                    <option value="{{ $color }}">{{ ucWords($color) }}</option>
-                                                @endforeach
-                                            </select>
+                                                    <option>--choose Color--</option>
+                                                    @foreach ($product_color_en as $color)
+                                                        <option value="{{ $color }}">{{ ucWords($color) }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            @endif
                                         </div>
 
                                     </div>
@@ -233,7 +236,7 @@
                                         <div class="form-group">
                                             <label class="info-title control-label">choose Size<span></span></label>
                                             <select class="form-control unicase-form-control selectpicker"
-                                                style="display: none">
+                                                style="display: none" id="size">
                                                 <option>--choose Size--</option>
                                                 @foreach ($product_size_en as $size)
                                                     <option value="{{ $size }}">{{ ucWords($size) }}</option>
@@ -246,11 +249,9 @@
                                 {{-- end product color and product size --}}
                                 <div class="quantity-container info-container">
                                     <div class="row">
-
-                                        <div class="col-sm-2">
+                              <div class="col-sm-2">
                                             <span class="label">Qty :</span>
                                         </div>
-
                                         <div class="col-sm-2">
                                             <div class="cart-quantity">
                                                 <div class="quant-input">
@@ -260,17 +261,18 @@
                                                         <div class="arrow minus gradient"><span class="ir"><i
                                                                     class="icon fa fa-sort-desc"></i></span></div>
                                                     </div>
-                                                    <input type="text" value="1">
+                                                    <input type="number" value="1"
+                                                        id="qty"min="1">
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <input type="hidden" id="product_id" value="{{ $product->id }}"
+                                            min="1">
                                         <div class="col-sm-7">
-                                            <a href="#" class="btn btn-primary"><i
-                                                    class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                            <button type="submit" onclick="AddToCart()" class="btn btn-primary"><i
+                                                    class="fa fa-shopping-cart inner-right-vs"></i> ADD TO
+                                                CART</button>
                                         </div>
-
-
                                     </div><!-- /.row -->
                                 </div><!-- /.quantity-container -->
                             </div><!-- /.product-info -->
@@ -287,9 +289,7 @@
                             </ul><!-- /.nav-tabs #product-tabs -->
                         </div>
                         <div class="col-sm-9">
-
                             <div class="tab-content">
-
                                 <div id="description" class="tab-pane in active">
                                     <div class="product-tab">
                                         <p class="text">
@@ -465,7 +465,8 @@
                                             <div class="image">
                                                 <a
                                                     href="{{ 'product/details/' . $product->id . '/' . $product->product_slug_en }}"><img
-                                                        src="{{ asset($product->product_thambnail) }}" alt=""></a>
+                                                        src="{{ asset($product->product_thambnail) }}"
+                                                        alt=""></a>
                                             </div><!-- /.image -->
 
                                             <div class="tag sale"><span>sale</span></div>
@@ -493,7 +494,8 @@
                                                 <div class="product-price">
                                                     <span class="price">
                                                         $ {{ $product->discount_price }} </span>
-                                                    <span class="price-before-discount">$ {{ $product->selling_price }}</span>
+                                                    <span class="price-before-discount">$
+                                                        {{ $product->selling_price }}</span>
 
                                                 </div><!-- /.product-price -->
                                             @endif
